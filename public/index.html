@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/style.css">
     <link href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Titillium+Web:700|Source+Serif+Pro:400,700|Merriweather+Sans:400,700|Source+Sans+Pro:400,300,600,700,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+     <script src="/semantic-ui/semantic.min.js"></script>
     <!--
       Notice the use of %PUBLIC_URL% in the tag above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -30,6 +31,93 @@
       To begin the development, run `npm start`.
       To create a production bundle, use `npm run build`.
     -->
-      <script src="/semantic-ui/semantic.min.js"></script>
+     
+<script>
+  const initData = [
+    {
+      "id": "1",
+      "author": {
+        "id": "1",
+        "name": "Polly Jane"
+      },
+      "title": "How I spent my summer",
+      "text": "Few words about my summer story...",
+      "comments": [
+        {
+          "id": "1",
+          "text": "Paris is so cool!",
+          "commenter": {
+            "id": "2",
+            "name": "John Galt"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "author": {
+        "id": "2",
+        "name": "John Galt"
+      },
+      "title": "Walk in Paris",
+      "text": "The French eating habits the world should learn from",
+      "comments": [
+        {
+          "id": "2",
+          "text": "Paris is so cool!",
+          "commenter": {
+            "id": "1",
+            "name": "Polly Jane"
+          }
+        }
+      ]
+    },
+     {
+      "id": "3",
+      "author": {
+        "id": "3",
+        "name": "Galt John"
+      },
+      "title": "How I spent my summer",
+      "text": "Few words about my summer story...",
+      "comments": [
+        {
+          "id": "1",
+          "text": "Paris is so cool!",
+          "commenter": {
+            "id": "2",
+            "name": "John Galt"
+          }
+        }
+      ]
+    },
+
+     {
+      "id": "4",
+      "author": {
+        "id": "4",
+        "name": "Jane Polly"
+      },
+      "title": "How I spent my summer",
+      "text": "Few words about my summer story...",
+      "comments": [
+        {
+          "id": "1",
+          "text": "Paris is so cool!",
+          "commenter": {
+            "id": "2",
+            "name": "John Galt"
+          }
+        }
+      ]
+    },
+
+  ]
+
+  localStorage.setItem('articles', initData)
+
+  
+
+</script>
   </body>
 </html>

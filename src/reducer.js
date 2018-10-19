@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-
+import {common} from '/reducers/common';
 
 
 
