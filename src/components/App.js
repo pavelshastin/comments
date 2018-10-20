@@ -40,8 +40,7 @@ render() {
 	}
 
 	return (
-		<Header 
-			appName={this.props.appName} />
+		<Header  />
 	)
 
 }
