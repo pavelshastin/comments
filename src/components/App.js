@@ -23,6 +23,9 @@ const mapDispatchToProps = state => {
 class App extends React.Component {
 
 
+
+
+
 render() {
 	if (this.props.appLoaded) {
 	return (
