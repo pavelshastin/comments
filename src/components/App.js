@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Header from '/components/Header';
-import Articles from '/components/Articles'
+import PageHeader from './Header';
+import Home from './Home';
+import Article from './Article'
+import User from './User'
 import {Switch, Route} from 'react-router-dom';
 
 
@@ -29,18 +31,23 @@ class App extends React.Component {
 render() {
 	if (this.props.appLoaded) {
 	return (
-		<Header 
+		<div>
+		<PageHeader 
 			appName={this.props.appName} />
 
 			<Switch>
-				<Route exact path="/" component={Articles} />
-				<Route exact path="/articles" component={Articles} />
+				<Route exact path="/" component={Home} />
+				<Route path="/articles/:id" component={Article} />
+				<Route path="/users/:id" component={User} />
 			</Switch>
+		</div>
 		)
 	}
 
 	return (
-		<Header  />
+		<div>
+			<PageHeader  />
+		</div>
 	)
 
 }
