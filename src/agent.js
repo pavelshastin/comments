@@ -1,12 +1,11 @@
-import _superagent from 'superagent';
-import superagentPromise from 'superagent-promise';
+//import _superagent from 'superagent';
+//import superagentPromise from 'superagent-promise';
+//const superagent = superagentPromise(_superagent, global.Promise);
 
-const superagent = superagentPromise(_superagent, global.Promise);
+
+//const API_ROOT = '/api';
 
 
-const API_ROOT = '/api';
-
-const encode = encodeURIComponent;
 const responseBody = res => res.body;
 
 
@@ -33,21 +32,23 @@ const requests = {
 					const comment_id = url.split("/")[2];
 
 					articles.forEach((article, index) => {
-						for(key in article.comments) {
-							if (article.comments[key].id == comment_id) articles[index].comments[key].text = body
+						for(let key in article.comments) {
+							if (article.comments[key].id === comment_id) articles[index].comments[key].text = body
 						}
 					})
 
 					window.localStorage.setItem("articles", JSON.stringify(articles));
 					
-					return new Promise((resolve, reject) => {
+					const promise = new Promise((resolve, reject) => {
 
 						setTimeout(()=> {
 							resolve({body: {"success": true}})
 						}, Math.random()*2000)
 					
 					}).then(responseBody)
-				};
+
+					return promise;
+				}
 
 				case (url.match(/\/users\/\d+/) || {}).input: {
 					
@@ -56,10 +57,10 @@ const requests = {
 
 					articles.forEach((article, index) => {
 
-						if (article.author.id == user_id) articles[index].author.name = body
+						if (article.author.id === user_id) articles[index].author.name = body
 
-						for(key in article.comments) {
-							if (article.comments[key].commenter.id == user_id) articles[index].comments[key].commenter.name = body
+						for(let key in article.comments) {
+							if (article.comments[key].commenter.id === user_id) articles[index].comments[key].commenter.name = body
 						}
 					})
 
@@ -94,7 +95,9 @@ const requests = {
 	get: url => {
 			switch(url) {
 				case('/articles'): {
+					
 					const articles = JSON.parse(window.localStorage.getItem('articles'))
+					
 					
 					 return new Promise((response, reject) => {
 					 		
@@ -103,7 +106,7 @@ const requests = {
 					 	}, 2000)
 					 
 					 }).then(responseBody)
-				};
+				}
 
 				case (url.match(/\/articles\/\d+/) || {}).input: {
 					
@@ -114,7 +117,7 @@ const requests = {
 
 					articles.forEach(article => {
 						
-						if (parseInt(article.id) == article_id) {
+						if (parseInt(article.id, 10) === article_id) {
 							
 							articleBody = article
 						} 
@@ -128,7 +131,7 @@ const requests = {
 
 						}).then(responseBody) 
 
-				};
+				}
 
 
 				default: {
