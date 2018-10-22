@@ -4,7 +4,8 @@
   "private": true,
   "devDependencies": {
     "cross-env": "^5.1.4",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "semantic-ui-react": "^0.82.5"
   },
   "dependencies": {
     "history": "^4.6.3",
