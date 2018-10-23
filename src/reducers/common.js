@@ -12,9 +12,10 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case APP_LOAD: 
-      return {...state, 
-        appLoaded: true
+    case APP_LOAD:   
+      return {...state,
+        appLoaded: true,
+        articles: action.payload
       }
             
     default:

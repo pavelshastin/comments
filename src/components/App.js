@@ -11,6 +11,7 @@ import agent from '../agent'
 const mapStateToProps = state => {
 	return {
 		appLoaded: state.common.appLoaded,
+		articles: state.articles
 	}
 }
 
@@ -24,18 +25,15 @@ const mapDispatchToProps = dispatch => {
 
 class App extends React.Component {
 
-
-
 	componentWillMount() {
 		const articles = agent.Articles.all();
-
+		
 		this.props.onLoad(articles)
 	}
 
 
-
 	render() {
-		if (this.props.appLoaded) {
+		
 		return (
 			<div>
 			<PageHeader 
@@ -44,22 +42,14 @@ class App extends React.Component {
 				<Switch>
 					<Route exact path="/" component={Home} />
 					<Route path="/articles/:id" component={Article} />
-					<Route path="/users/:id" component={User} />
+					<Route path="/users/:id/:name" component={User} />
+					<Route path="/comments/:id" component={Comment} />
 				</Switch>
 			</div>
-			)
-		}
-
-		return (
-			<div>
-				<PageHeader  />
-			</div>
 		)
-
+		
+	}
 }
-
-}
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
 

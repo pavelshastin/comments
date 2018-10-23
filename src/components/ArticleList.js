@@ -1,33 +1,48 @@
 import React from 'react'
-import {Segment, Card, Icon} from 'semantic-ui-react'
-
+import {Card, Icon} from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 const ArticleList = (props) => {
 	
-	
 		return (
-			<Segment raised style={{minHeight: '600px'}}>
-				<Card fluid>
-					
-					<Card.Content>
-						<span style={{float: 'right'}}>
-							<Icon name="thumbs up outline" size="large"/>
-						</span>
-						
-						<Card.Header as="a">Article Title</Card.Header>
-						<Card.Meta as="a">Author name</Card.Meta>
+			<div>
+			
+				{
+					props.articles.map((article) => {
+						return (
+							<Link to={`/articles/${ article.id }`}>
+							<Card fluid>
+								<Card.Content>
+									<Card.Header>
+										{article.title}
+									</Card.Header>
+									
+									<Link to={`/user/${ article.author.id }`}>
+										<Card.Meta as="a">
+											{article.author.name}
+										</Card.Meta>
+									</Link>
+									
+									<Card.Description floated="left">
+										{article.text}
+									</Card.Description>
 
-						
-						<Card.Description floated="left">Article Preview</Card.Description>
-
-						<span style={{float: 'right'}}>
-							<Icon  name="comments" size="large"/>
-						</span>
-						
-					</Card.Content>
-				</Card>
-			</Segment>
-
+									<span style={{float: 'right'}}>
+										<Link to={`/article/${article.id}/#comments`}>
+											<Card.Meta as="a">
+												<Icon  name="comments" size="large"/>
+											</Card.Meta>
+										</Link>
+									</span>
+									
+								</Card.Content>
+							</Card>
+							</Link>
+						);
+					})
+				}
+			
+			</div>
 		)
 	
 

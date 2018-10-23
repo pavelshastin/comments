@@ -1,69 +1,45 @@
 import React from 'react'
-import {Segment, Comment} from 'semantic-ui-react'
-
+import { Comment } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 
 
 const Comments = (props) => {
 
-	
-
 	return(
-		<Segment raised style={{minHeight: '600px'}}>
-			
-			<Comment.Group size="massive">	
-				<Comment>
-					
-					<Comment.Content>
-						<Comment.Author>
-							Author Name
-						</Comment.Author>
-						<Comment.Text>
-							Comment Text
-						</Comment.Text>
-					
-					
-					<Comment.Actions>
-						<Comment.Action>
-							DELETE
-						</Comment.Action>
-						<Comment.Action>
-							EDIT
-						</Comment.Action>
-					</Comment.Actions>
+		
+		<Comment.Group size="big">
 
-					</Comment.Content>	
-				</Comment>
+			{ props.comments.map(comment => {
+				return (
+					<Comment id={comment.id}>
+						<Comment.Content>
+							<Link to={`/users/${comment.commenter.id}`}>
+								<Comment.Author>
+									{comment.commenter.name}
+								</Comment.Author>
+							</Link>
+							
+							<Comment.Text>
+								{comment.text}
+							</Comment.Text>
+						
+							<Comment.Actions>
+								<Link to={`/comment/${comment.id}`}>
+									<Comment.Action>
+										EDIT
+									</Comment.Action>
+								</Link>	
+							</Comment.Actions>
 
+						</Comment.Content>	
+					</Comment>
+				)
 
-				<Comment>
-					
-					<Comment.Content>
-						<Comment.Author>
-							Author Name
-						</Comment.Author>
-						<Comment.Text>
-							Comment Text
-						</Comment.Text>
-					
-					
-					<Comment.Actions>
-						<Comment.Action>
-							DELETE
-						</Comment.Action>
-						<Comment.Action>
-							EDIT
-						</Comment.Action>
-					</Comment.Actions>
+			})}
 
-					</Comment.Content>	
-				</Comment>
-
-			</Comment.Group>	
+		</Comment.Group>	
 				
-		</Segment>
-
-
 	)
 
 }

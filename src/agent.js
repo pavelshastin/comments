@@ -111,8 +111,8 @@ const requests = {
 				case (url.match(/\/articles\/\d+/) || {}).input: {
 					
 					const articles = JSON.parse(window.localStorage.getItem('articles'))
-					const article_id = url.split("/")[2];
-
+					const article_id = parseInt(url.split("/")[2], 10);
+					
 					let articleBody = "No such article" //if article matches the id in the further forEach-cycle the variable will be reassigned
 
 					articles.forEach(article => {
@@ -135,7 +135,7 @@ const requests = {
 
 
 				default: {
-					console.log("default")
+					
 				}
 			}
 

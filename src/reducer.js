@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import common from './reducers/common';
-
+import article from './reducers/article';
 
 
 
@@ -8,5 +8,6 @@ import common from './reducers/common';
 
 
 export default combineReducers({
-	common
+	common,
+	article
 })
