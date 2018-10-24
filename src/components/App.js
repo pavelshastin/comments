@@ -4,6 +4,7 @@ import PageHeader from './Header';
 import Home from './Home';
 import Article from './Article'
 import User from './User'
+import CommentEdit from './CommentEdit'
 import { Switch, Route } from 'react-router-dom';
 import { APP_LOAD } from '../constants/actionTypes'
 import agent from '../agent'
@@ -43,7 +44,7 @@ class App extends React.Component {
 					<Route exact path="/" component={Home} />
 					<Route path="/articles/:id" component={Article} />
 					<Route path="/users/:id/:name" component={User} />
-					<Route path="/comments/:id" component={Comment} />
+					<Route path="/comment/:id" component={CommentEdit} />
 				</Switch>
 			</div>
 		)

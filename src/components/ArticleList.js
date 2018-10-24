@@ -28,7 +28,7 @@ const ArticleList = (props) => {
 									</Card.Description>
 
 									<span style={{float: 'right'}}>
-										<Link to={`/article/${article.id}/#comments`}>
+										<Link to={`/articles/${article.id}/#comments`}>
 											<Card.Meta as="a">
 												<Icon  name="comments" size="large"/>
 											</Card.Meta>

@@ -13,12 +13,7 @@ export default (state = {}, action) => {
     case EDITOR_PAGE_LOADED:
       return {
         ...state,
-        articleSlug: action.payload ? action.payload.article.slug : '',
-        title: action.payload ? action.payload.article.title : '',
-        description: action.payload ? action.payload.article.description : '',
-        body: action.payload ? action.payload.article.body : '',
-        tagInput: '',
-        tagList: action.payload ? action.payload.article.tagList : []
+        commentToEdit: action.payload ? action.payload.comment : '',
       };
     case EDITOR_PAGE_UNLOADED:
       return {};

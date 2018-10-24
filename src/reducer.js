@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import common from './reducers/common';
 import article from './reducers/article';
-
+import editor from './reducers/editor';
 
 
 
@@ -9,5 +9,6 @@ import article from './reducers/article';
 
 export default combineReducers({
 	common,
-	article
+	article,
+	editor 
 })

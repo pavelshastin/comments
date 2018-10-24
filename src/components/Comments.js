@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 
 
 const Comments = (props) => {
-	
+
+
 
 	return(
 		
@@ -29,8 +30,8 @@ const Comments = (props) => {
 							</Comment.Text>
 						
 							<Comment.Actions>
-								<Link to={`/comment/${comment.id}/${comment.commenter.name}`}>
-									<Comment.Action>
+								<Link to={`/comment/${comment.id}`}>
+									<Comment.Action >
 										EDIT
 									</Comment.Action>
 								</Link>	
