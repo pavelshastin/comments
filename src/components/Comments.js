@@ -5,18 +5,22 @@ import { Link } from 'react-router-dom'
 
 
 const Comments = (props) => {
+	
 
 	return(
 		
-		<Comment.Group size="big">
+		<Comment.Group size="big" id="comments">
 
 			{ props.comments.map(comment => {
+
+				const author = (props.location !== 'user') ? comment.commenter.name: null
+				
 				return (
 					<Comment id={comment.id}>
 						<Comment.Content>
-							<Link to={`/users/${comment.commenter.id}`}>
+							<Link to={`/users/${comment.commenter.id}/${comment.commenter.name}`}>
 								<Comment.Author>
-									{comment.commenter.name}
+									{author}
 								</Comment.Author>
 							</Link>
 							
@@ -25,7 +29,7 @@ const Comments = (props) => {
 							</Comment.Text>
 						
 							<Comment.Actions>
-								<Link to={`/comment/${comment.id}`}>
+								<Link to={`/comment/${comment.id}/${comment.commenter.name}`}>
 									<Comment.Action>
 										EDIT
 									</Comment.Action>

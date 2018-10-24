@@ -17,7 +17,7 @@ const ArticleList = (props) => {
 										{article.title}
 									</Card.Header>
 									
-									<Link to={`/user/${ article.author.id }`}>
+									<Link to={`/users/${ article.author.id }/${ article.author.name }`}>
 										<Card.Meta as="a">
 											{article.author.name}
 										</Card.Meta>
