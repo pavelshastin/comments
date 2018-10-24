@@ -11,9 +11,29 @@ import {
 export default (state = {}, action) => {
   switch (action.type) {
     case EDITOR_PAGE_LOADED:
+
+      let comment
+
+      if (action.payload && action.commentId) {
+
+          action.payload.forEach(article => {
+              const _comment = article.comments.filter(comment => comment.id === action.commentId)
+              
+              if(_comment.length > 0) comment = _comment[0];
+          })
+      }
+
+      alert(JSON.stringify(comment))
+
       return {
         ...state,
-        commentToEdit: action.payload ? action.payload.comment : '',
+        articles: action.payload ? action.payload : [],
+        appLoaded: action.payload ? true : false,
+        commentId: comment ? comment.id : '',
+        commentText: comment ? comment.text : '',
+        commenterId: comment ? comment.commenter.id : '',
+        commenterName: comment ? comment.commenter.name : ''
+        
       };
     case EDITOR_PAGE_UNLOADED:
       return {};

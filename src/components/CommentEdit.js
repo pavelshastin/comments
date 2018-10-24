@@ -17,14 +17,13 @@ const mapStateToProps = state => {
 
 
 const mapDispatchToState = dispatch => ({
-	onUpdate: (comment, articles) => (
-		dispatch({type: 'COMMENT_UPDATE', payload, articles})
+	onUpdate: (comment) => (
+		dispatch({type: 'COMMENT_UPDATE', comment})
 	),
-	onLoad: (payload) => (
-		dispatch({type: APP_LOAD, payload})
+	onLoad: (payload, commentId) => (
+		dispatch({type: EDITOR_PAGE_LOADED, payload, commentId})
 	)
 })
-
 
 
 class CommentEdit extends React.Component {
@@ -48,10 +47,12 @@ class CommentEdit extends React.Component {
 	componentWillMount() {
 
 		if(!this.props.appLoaded) {
-			const promisePayload = agent.Articles.all()
 			
-			this.props.onLoad(promisePayload)
+			this.props.onLoad(agent.Articles.all(), this.props.match.params.id)
+			return
 		}
+
+		this.props.onLoad(this.props.articles, this.props.match.params.id)
 		
 	}
 	
