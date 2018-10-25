@@ -45,7 +45,7 @@ const User = props => {
 			<Header as="h1">{props.match.params.name}</Header>
 			<Divider />
 			<Comments   comments={comments} 
-						location="user"			/>
+						location={ props.match }			/>
 		</Container>
 	)
 

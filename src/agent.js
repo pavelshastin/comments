@@ -156,16 +156,16 @@ const Articles = {
 	get: id => requests.get(`/articles/${id}`),
 }
 
-const Users = {
+const User = {
 	edit: (id, name) => requests.put(`/users/${id}`, name)
 }
 
-const Comments = {
+const Comment = {
 	edit: (id, text) => requests.put(`/comments/${id}`, text)
 }
 
 export default {
 	Articles,
-	Users,
-	Comments
+	User,
+	Comment
 }

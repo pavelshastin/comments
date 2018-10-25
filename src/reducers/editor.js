@@ -1,65 +1,99 @@
 import {
   EDITOR_PAGE_LOADED,
-  EDITOR_PAGE_UNLOADED,
-  ARTICLE_SUBMITTED,
+  COMMENT_SUBMITTED,
   ASYNC_START,
-  ADD_TAG,
-  REMOVE_TAG,
+  REDIRECT,
   UPDATE_FIELD_EDITOR
 } from '../constants/actionTypes';
 
-export default (state = {}, action) => {
+const defaultState = {
+    commenterChange: 0,
+    commentChange: 0,
+    redirectTo: "/"
+}
+
+export default (state = defaultState, action) => {
   switch (action.type) {
     case EDITOR_PAGE_LOADED:
-
-      let comment
-
-      if (action.payload && action.commentId) {
-
+      let comment = []
+      
+      if(action.payload && action.commentId) {
           action.payload.forEach(article => {
               const _comment = article.comments.filter(comment => comment.id === action.commentId)
-              
-              if(_comment.length > 0) comment = _comment[0];
+
+              if(_comment.length > 0) {
+                comment = _comment[0]
+              }
           })
       }
-
-      alert(JSON.stringify(comment))
-
+      
       return {
         ...state,
-        articles: action.payload ? action.payload : [],
-        appLoaded: action.payload ? true : false,
-        commentId: comment ? comment.id : '',
-        commentText: comment ? comment.text : '',
-        commenterId: comment ? comment.commenter.id : '',
-        commenterName: comment ? comment.commenter.name : ''
-        
+        articles: action.payload ? action.payload: [],
+        appLoaded: true,
+        commentId: comment.id ? comment.id : '',
+        commentText: comment.text ? comment.text : '',
+        commenterId: comment.commenter ? comment.commenter.id : '',
+        commenterName: comment.commenter ? comment.commenter.name : '',
+        commenterChange: 0,
+        commentChange: 0
       };
-    case EDITOR_PAGE_UNLOADED:
-      return {};
-    case ARTICLE_SUBMITTED:
+    case COMMENT_SUBMITTED:
+      if(action.payload) {
+          const commenterId = state.commenterId
+          const commenterName = state.commenterId
+          const commentId = state.commenterId
+          const commentText = state.commenterId
+      
+          if ((action.payload.success || action.payload.length === 2) && action.comment) {
+              
+              
+              state.articles.forEach((article, index) => {
+                for(let key in article.comments) {
+                  if (article.comments[key].id === commentId) state.articles[index].comments[key].text = commentText
+                }
+              })
+
+          } else if ((action.payload.success || action.payload.length === 2) && action.commenter) {
+              
+              state.articles.forEach((article, index) => {
+
+              if (article.author.id === commenterId) state.articles[index].author.name = commenterName
+
+              for(let key in article.comments) {
+                if (article.comments[key].commenter.id === commenterId) state.articles[index].comments[key].commenter.name = commenterName
+              }
+          })
+          
+
+          } 
+
+      }
       return {
         ...state,
         inProgress: null,
-        errors: action.error ? action.payload.errors : null
       };
     case ASYNC_START:
-      if (action.subtype === ARTICLE_SUBMITTED) {
+      if (action.subtype === COMMENT_SUBMITTED) {
         return { ...state, inProgress: true };
       }
       break;
-    case ADD_TAG:
+    case REDIRECT:
+      
       return {
         ...state,
-        tagList: state.tagList.concat([state.tagInput]),
-        tagInput: ''
+        redirectTo: action.location
       };
-    case REMOVE_TAG:
-      return {
-        ...state,
-        tagList: state.tagList.filter(tag => tag !== action.tag)
-      };
+    
     case UPDATE_FIELD_EDITOR:
+          if (action.key === "commenterName") {
+            state.commenterChange += 1
+          }
+
+          if (action.key === "commentText") {
+            state.commentChange += 1
+          }
+
       return { ...state, [action.key]: action.value };
     default:
       return state;

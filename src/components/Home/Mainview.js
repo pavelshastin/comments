@@ -3,20 +3,34 @@ import ArticleList from '../ArticleList'
 import Comments from '../Comments'
 import {Tab} from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import {TAB_CHANGE} from '../../constants/actionTypes'
 
 const mapStateToProps = state => {
 	return {
 		...state,
 		appLoaded: state.common.appLoaded,
-		articles: state.common.articles
+		articles: state.common.articles, 
+		activeTabIndex: state.common.activeTabIndex
 	}
 } 
+
+
+const mapDispatchToProps = dispatch => ({
+	onTabChange: (index) => (dispatch({type: TAB_CHANGE, index}))
+})
 
 
 
 const MainView = (props) => {
 	
 	let tabMenu = [];
+
+	const onTabChange = (ev, data) => {
+		ev.preventDefault()
+
+		props.onTabChange(data.activeIndex)
+	}
+
 
 	if (props.appLoaded) {
 		let comments = []
@@ -38,8 +52,14 @@ const MainView = (props) => {
 		comments.sort((a,b) => (b.id - a.id))
 
 		tabMenu = [
-			{ menuItem: "Articles", render: () => (<Tab.Pane><ArticleList articles={ props.articles } /></Tab.Pane>)},
-			{ menuItem: "Comments", render: () => (<Tab.Pane><Comments comments={ comments }/></Tab.Pane>)}
+			{ menuItem: "Articles", render: () => (<Tab.Pane >
+														<ArticleList articles={ props.articles } />
+													</Tab.Pane>)},
+
+			{ menuItem: "Comments", render: () => (<Tab.Pane>
+														<Comments  comments={ comments } 
+																	location={ {url: '/',  path: '/'} }/>
+													</Tab.Pane>)}
 		]
 	} else {
 		tabMenu = [
@@ -50,7 +70,10 @@ const MainView = (props) => {
 
 	return (
 		<div>
-			<Tab panes={tabMenu} style={{minHeight: '400px'}}/>
+			<Tab panes={tabMenu} 
+				onTabChange={ onTabChange }
+				activeIndex={ props.activeTabIndex }
+				style={{minHeight: '400px'}}/>
 		</div>
 	)
 
@@ -59,4 +82,4 @@ const MainView = (props) => {
 }
 
 
-export default connect(mapStateToProps)(MainView)
+export default connect(mapStateToProps, mapDispatchToProps)(MainView)

@@ -76,7 +76,7 @@
       "id": "3",
       "author": {
         "id": "3",
-        "name": "Galt John"
+        "name": "Galt John New"
       },
       "title": "How I spent my summer",
       "text": "Few words about my summer story...",
@@ -93,8 +93,8 @@
           "id": "48",
           "text": "Paris is so cool!48",
           "commenter": {
-            "id": "2",
-            "name": "John Galt"
+            "id": "3",
+            "name": "John Galt New"
           }
         },
         {
@@ -109,8 +109,8 @@
           "id": "848",
           "text": "Paris is so cool!848",
           "commenter": {
-            "id": "2",
-            "name": "John Galt"
+            "id": "3",
+            "name": "John Galt New"
           }
         }
       ]
@@ -120,7 +120,7 @@
       "id": "4",
       "author": {
         "id": "4",
-        "name": "Jane Polly"
+        "name": "Jane Polly New"
       },
       "title": "How I spent my summer",
       "text": "Few words about my summer story...",
@@ -161,8 +161,9 @@
     },
 
   ]
-
-  localStorage.setItem('articles', JSON.stringify(initData))
+   if (!window.localStorage.getItem("articles")) {
+      window.localStorage.setItem('articles', JSON.stringify(initData))
+   }
 
   
 

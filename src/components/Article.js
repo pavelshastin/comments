@@ -69,7 +69,8 @@ class Article extends React.Component {
 					{ article.text }
 				</p>
 				<Divider hidden/>
-				<Comments comments={ article.comments } />
+				<Comments comments={ article.comments } 
+						  location={ this.props.match }  	/>
 
 			</Container>
 		)

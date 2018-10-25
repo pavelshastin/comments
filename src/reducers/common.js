@@ -1,12 +1,12 @@
 import {
-  APP_LOAD
+  APP_LOAD,
+  TAB_CHANGE
   
 } from '../constants/actionTypes';
 
 const defaultState = {
-  appName: 'Conduit',
-  token: null,
-  viewChangeCounter: 0
+  activeTabIndex: 0,
+  inProgress: null
 }
 
 
@@ -16,7 +16,12 @@ export default (state = defaultState, action) => {
       return {...state,
         appLoaded: true,
         articles: action.payload
-      }
+      };
+     case TAB_CHANGE:
+       return {
+        ...state,
+        activeTabIndex: action.index
+       }; 
             
     default:
       return state;
