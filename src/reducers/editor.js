@@ -9,7 +9,8 @@ import {
 const defaultState = {
     commenterChange: 0,
     commentChange: 0,
-    redirectTo: "/"
+    redirectTo: "/",
+    inProgress: null
 }
 
 export default (state = defaultState, action) => {
@@ -27,6 +28,7 @@ export default (state = defaultState, action) => {
           })
       }
       
+
       return {
         ...state,
         articles: action.payload ? action.payload: [],
@@ -39,11 +41,13 @@ export default (state = defaultState, action) => {
         commentChange: 0
       };
     case COMMENT_SUBMITTED:
+      //alert(JSON.stringify(action))
+      
       if(action.payload) {
           const commenterId = state.commenterId
-          const commenterName = state.commenterId
-          const commentId = state.commenterId
-          const commentText = state.commenterId
+          const commenterName = state.commenterName
+          const commentId = state.commentId
+          const commentText = state.commentText
       
           if ((action.payload.success || action.payload.length === 2) && action.comment) {
               
@@ -54,8 +58,11 @@ export default (state = defaultState, action) => {
                 }
               })
 
-          } else if ((action.payload.success || action.payload.length === 2) && action.commenter) {
+          }  
+
+          if ((action.payload.success || action.payload.length === 2) && action.commenter) {
               
+             
               state.articles.forEach((article, index) => {
 
               if (article.author.id === commenterId) state.articles[index].author.name = commenterName
@@ -63,7 +70,7 @@ export default (state = defaultState, action) => {
               for(let key in article.comments) {
                 if (article.comments[key].commenter.id === commenterId) state.articles[index].comments[key].commenter.name = commenterName
               }
-          })
+            })
           
 
           } 
@@ -93,6 +100,8 @@ export default (state = defaultState, action) => {
           if (action.key === "commentText") {
             state.commentChange += 1
           }
+
+          
 
       return { ...state, [action.key]: action.value };
     default:

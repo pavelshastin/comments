@@ -45,6 +45,17 @@ class CommentEdit extends React.Component {
     
 	    this.changeComment = updateFieldEvent('commentText');
 	    this.changeCommenter = updateFieldEvent('commenterName');
+
+
+	    this.redirect = (res) => {
+	    	
+	    	setTimeout(() => {
+	    		this.props.history.push(this.props.redirectTo)
+	    	}, 100)   	 	
+	    	
+	    	
+	    	return res
+	    }
 	 
 
 
@@ -62,23 +73,23 @@ class CommentEdit extends React.Component {
 				const comment = agent.Comment.edit(commentId, commentText)
 				const commenter = agent.User.edit(commenterId, commenterName)
 				
-				this.props.onCommentSubmit(promise.all([comment, commenter]), true, true)
+				this.props.onCommentSubmit(promise.all([comment, commenter]).then(this.redirect), true, true)
 				
 			} else if (!this.props.commenterChange && this.props.commentChange) {
 
-				const comment = agent.Comment.edit(commentId, commentText)
+				const comment = agent.Comment.edit(commentId, commentText).then(this.redirect)
 				
 				this.props.onCommentSubmit(comment, false, true)	
 
 			} else if (this.props.commenterChange && !this.props.commentChange) {
 
-				const commenter = agent.User.edit(commenterId, commenterName)
+				const commenter = agent.User.edit(commenterId, commenterName).then(this.redirect)
 				
 				this.props.onCommentSubmit(commenter, true, false)
 
 			} else if (!this.props.commenterChange && !this.props.commentChange) {
 
-				this.props.history.push(this.props.redirectTo)
+					this.redirect()
 			}
 			
 			
@@ -108,7 +119,10 @@ class CommentEdit extends React.Component {
 
 
 
-		if (this.props.appLoaded && !this.props.inProgress) {
+		if (this.props.appLoaded && !this.props.editor.inProgress) {
+			
+			
+
 
 			return (
 				<Container >

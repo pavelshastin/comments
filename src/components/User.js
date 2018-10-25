@@ -8,7 +8,8 @@ const mapStateToProps = state => {
 	return {
 		...state,
 		appLoaded: state.common.appLoaded,
-		articles: state.common.articles
+		articles: state.common.articles,
+		commenterName: state.editor.commenterName
 	}
 }
 
@@ -42,7 +43,7 @@ const User = props => {
 	return (
 		<Container>
 			<Divider />
-			<Header as="h1">{props.match.params.name}</Header>
+			<Header as="h1">{props.commenterName ? props.commenterName : props.match.params.name}</Header>
 			<Divider />
 			<Comments   comments={comments} 
 						location={ props.match }			/>

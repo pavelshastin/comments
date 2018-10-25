@@ -6,7 +6,6 @@ import {
 
 const defaultState = {
   activeTabIndex: 0,
-  inProgress: null
 }
 
 

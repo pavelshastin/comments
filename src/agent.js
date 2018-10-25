@@ -1,25 +1,4 @@
-//import _superagent from 'superagent';
-//import superagentPromise from 'superagent-promise';
-//const superagent = superagentPromise(_superagent, global.Promise);
-
-
-//const API_ROOT = '/api';
-
-
-const responseBody = res => res.body;
-
-
-// const requests = {
-// 	put: (url, body) =>
-// 		 superagent.put(`${API_ROOT}${url}`, body).then(responseBody),
-// 	post:(url, body) =>
-// 		 superagent.post(`${API_ROOT}${url}`, body).then(responseBody),
-// 	get: url =>
-// 		 superagent.get(`${API_ROOT}${url}`).then(responseBody),
-// 	del: url =>
-// 		 superagent.del(`${API_ROOT}${url}`).then(responseBody),
-// }
-
+const responseBody = res => res.body
 
 
 const requests = {
@@ -103,7 +82,7 @@ const requests = {
 					 		
 					 	setTimeout(()=>{
 					 		response({body: articles})
-					 	}, 2000)
+					 	}, Math.random()*2000)
 					 
 					 }).then(responseBody)
 				}
@@ -127,7 +106,7 @@ const requests = {
 
 							setTimeout(()=>{
 								resolve({body: articleBody})
-							}, 2000)
+							}, Math.random()*2000)
 
 						}).then(responseBody) 
 
